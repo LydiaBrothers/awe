@@ -181,9 +181,11 @@ class Config(object):
         self.waittime        = 10 # in seconds
         self.wq_logfile      = 'debug/wq.log'
         self.wqstats_logfile = 'debug/wq-stats.log'
-        self.monitor         = False	
+        self.wqtransactions_logfile = 'debug/wq-transactions.log'
+        self.monitor         = True	
         self.summaryfile     = ''
         self.capacity        = False
+	self.cores           = 1
         self.task_config     = {
                                    "cores": 1,
                                }
@@ -278,6 +280,7 @@ class Config(object):
             # Turn cctools WorkQueue object status monitoring on or off
             if self.monitor: 
                 wq.enable_monitoring(self.summaryfile)
+                wq.specify_transactions_log(self.wqtransactions_logfile)
 
             if self.capacity:
                 # Determine the number of workers the WorkQueue object can handle
