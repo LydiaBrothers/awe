@@ -71,7 +71,7 @@ def getopts(args=None):
             port         = 'random',
             fast_abort   = False,
             debug        = False,
-	    cores	 = 1,
+            cores	 = 1,
             )
 
 
@@ -120,7 +120,7 @@ def config(opts):
         cfg.debug = opts.debug
 
     cfg.cores = opts.worker_cores
-    cfg.task_input["cores"] = opts.task_cores
+    cfg.task_config["cores"] = opts.task_cores
 
     # the "main" function of the worker
     cfg.execute(os.path.join(INSTANCE_ROOT, 'execute-task.sh'))
@@ -190,7 +190,8 @@ def main(opts):
                             system         = system,
                             iterations     = opts.iterations,
                             resample       = resampler,
-                            checkpointfreq = 1
+                            checkpointfreq = 1,
+                            log_it         = True,
                             )
         resampler.traxlogger._picklemode = 2
         resampler.traxlogger._pickleprotocol = 2

@@ -183,9 +183,9 @@ class Config(object):
         self.wqstats_logfile = 'debug/wq-stats.log'
         self.wqtransactions_logfile = 'debug/wq-transactions.log'
         self.monitor         = True	
-        self.summaryfile     = ''
+        self.summaryfile     = 'debug/monitor-summaries'
         self.capacity        = False
-	self.cores           = 1
+        self.cores           = 1
         self.task_config     = {
                                    "cores": 1,
                                }
