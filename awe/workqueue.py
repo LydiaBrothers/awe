@@ -181,10 +181,14 @@ class Config(object):
         self.waittime        = 10 # in seconds
         self.wq_logfile      = 'debug/wq.log'
         self.wqstats_logfile = 'debug/wq-stats.log'
-        self.monitor         = False	
-        self.summaryfile     = ''
+        self.wqtransactions_logfile = 'debug/wq-transactions.log'
+        self.monitor         = True	
+        self.summaryfile     = 'debug/monitor-summaries'
         self.capacity        = False
-
+        self.cores           = 1
+        self.task_config     = {
+                                   "cores": 1,
+                               }
         self._executable = None
         self._cache = set()
 
@@ -276,6 +280,7 @@ class Config(object):
             # Turn cctools WorkQueue object status monitoring on or off
             if self.monitor: 
                 wq.enable_monitoring(self.summaryfile)
+                wq.specify_transactions_log(self.wqtransactions_logfile)
 
             if self.capacity:
                 # Determine the number of workers the WorkQueue object can handle
@@ -651,7 +656,7 @@ class WorkQueue(object):
 
         cmd = self.cfg.executable.remotepath
         task = WQ.Task('./' + cmd)
-
+        task.specify_cores(self.cfg.task_config["cores"])
         ### executable
         self.cfg.executable.add_to_task(task)
 
@@ -902,7 +907,7 @@ class WorkQueue(object):
                 try:
                     result = marshall(task)
                 except Exception as ex:
-                    #print("In the exception")
+                    print("In the exception")
                     ### sometimes a task fails, but still returns.
                     ##+ attempt to restart these
                     if not self.restart(task):
