@@ -185,9 +185,11 @@ class Config(object):
         self.monitor         = True	
         self.summaryfile     = 'debug/monitor-summaries'
         self.capacity        = False
-        self.cores           = 1
+        #self.cores           = 1
         self.task_config     = {
                                    "cores": 1,
+                                   "memory": 250,
+                                   "disk": 250,
                                }
         self._executable = None
         self._cache = set()
@@ -305,7 +307,7 @@ class Config(object):
         awe.util.makedirs_parent(self.wqstats_logfile)
         _AWE_WORK_QUEUE.specify_log(self.wqstats_logfile)
 
-        # Return a reference to teh singleton
+        # Return a reference to the singleton
         return _AWE_WORK_QUEUE
 
 
@@ -658,6 +660,8 @@ class WorkQueue(object):
         cmd = self.cfg.executable.remotepath
         task = WQ.Task('./' + cmd)
         task.specify_cores(self.cfg.task_config["cores"])
+        task.specify_memory(self.cfg.task_config["memory"])
+        task.specify_disk(self.cfg.task_config["disk"])
         ### executable
         self.cfg.executable.add_to_task(task)
 
