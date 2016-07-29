@@ -185,7 +185,6 @@ class Config(object):
         self.monitor         = True	
         self.summaryfile     = 'debug/monitor-summaries'
         self.capacity        = False
-        #self.cores           = 1
         self.task_config     = {
                                    "cores": 1,
                                    "memory": 250,

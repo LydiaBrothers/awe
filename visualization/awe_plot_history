@@ -64,6 +64,7 @@ set format x "%H:%M"
 set style line 1 lc rgb '#0060ad' lt 1 lw 1   # --- blue
 set style line 2 lc rgb '#dd181f' lt 1 lw 1   # --- red
 set style line 3 lc rgb '#33cc33' lt 1 lw 2   # --- green
+set style line 4 lc rgb '#ba58f9' lt 1 lw 1   # --- violet
 
 #First path indicates directory where log file exists,by default we assume it is in same directory as this file
 #Second path is used to specify a different directory for the resulting .png files to be placed (instead of working directory), e.g."./debug/"
